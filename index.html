@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Script Editor - Pro</title>
+    <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs/editor/editor.main.min.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #1e1e1e;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        header {
+            background: #252526;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            font-weight: bold;
+            color: #00a2ff;
+            font-size: 1.2rem;
+        }
+
+        #container {
+            width: 100%;
+            height: calc(100vh - 50px);
+        }
+
+        /* Estilização da barra de rolagem */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #1e1e1e; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">ROBLOX LUAU EDITOR</div>
+    <div style="font-size: 12px; color: #888;">Digite seu script abaixo...</div>
+</header>
+
+<div id="container"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs/loader.min.js"></script>
+<script>
+    require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs' }});
+
+    require(['vs/editor/editor.main'], function() {
+        
+        // Lista das suas variáveis e funções para o Autocomplete
+        const robloxKeywords = [
+            "print", "pairs", "ipairs", "game", "workspace", "script", "require", "typeof", "local", "end", 
+            "function", "if", "then", "else", "elseif", "for", "while", "do", "repeat", "until", "return", 
+            "break", "true", "false", "nil", "and", "not", "or", "continue", "ScreenGui", "BillboardGui", 
+            "SurfaceGui", "Frame", "ScrollingFrame", "CanvasGroup", "TextLabel", "TextButton", "TextBox", 
+            "ImageLabel", "ImageButton", "UIListLayout", "UIGridLayout", "UIPageLayout", "UICorner", 
+            "UIStroke", "UIPadding", "UIAspectRatioConstraint", "UIScale", "UISizeConstraint", 
+            "UITextSizeConstraint", "ViewportFrame", "VideoFrame", "shared", "settings", "WaitForChild", 
+            "FindFirstChild", "FindFirstChildWhichIsA", "GetChildren", "GetDescendants", "Destroy", 
+            "Clone", "IsA", "Color3.new", "Color3.fromRGB", "Color3.fromHSV", "UDim2.new", "UDim.new", 
+            "Vector2.new", "Vector3.new", "CFrame.new", "TweenService:Create", "Tween:Play", "Tween:Pause", 
+            "Tween:Cancel", "TweenInfo.new"
+        ];
+
+        // Registra o provedor de completamento automático
+        monaco.languages.registerCompletionItemProvider('lua', {
+            provideCompletionItems: function(model, position) {
+                var suggestions = robloxKeywords.map(item => {
+                    return {
+                        label: item,
+                        kind: monaco.languages.CompletionItemKind.Keyword,
+                        insertText: item
+                    };
+                });
+                return { suggestions: suggestions };
+            }
+        });
+
+        // Configuração do Editor
+        const editor = monaco.editor.create(document.getElementById('container'), {
+            value: [
+                '-- Bem-vindo ao Editor Roblox Luau',
+                'local part = Instance.new("Part")',
+                'part.Parent = workspace',
+                'part.Color = Color3.fromRGB(255, 0, 0)',
+                '',
+                'print("Script iniciado!")'
+            ].join('\n'),
+            language: 'lua',
+            theme: 'vs-dark',
+            fontSize: 16,
+            fontFamily: "'Fira Code', 'Consolas', monospace",
+            automaticLayout: true,
+            cursorBlinking: "expand",
+            suggestOnTriggerCharacters: true,
+            autoClosingBrackets: "always",
+            autoClosingQuotes: "always",
+            lineNumbers: "on",
+            minimap: { enabled: true }
+        });
+
+        // Efeito Visual: Ao digitar "(", ele sugere completar
+        editor.onKeyDown((e) => {
+            // Lógica extra pode ser adicionada aqui
+        });
+    });
+</script>
+
+</body>
+</html>
