@@ -148,7 +148,7 @@
             color: white;
             font-family: Arial, sans-serif;
             font-size: 14px;
-            z-index: 1000;
+            z-index: 100000000;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -171,16 +171,3 @@
 
 </body>
 </html>
-
-    <script>
-    // Escuta o evento antes do descarregamento da página
-    window.addEventListener('beforeunload', function (e) {
-        // Mensagem personalizada (Note: navegadores modernos costumam exibir uma mensagem padrão por segurança)
-        var mensagem = "Ao você atualizar página você pode perder o que você fez, tem certeza que quer atualizar?";
-
-        // Configura a confirmação
-        e.preventDefault(); 
-        e.returnValue = mensagem; // Necessário para Chrome/Firefox
-        return mensagem;          // Necessário para outros navegadores
-    });
-</script>
