@@ -129,3 +129,45 @@
 </html>
 
 <script>
+
+
+    <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Meu Site com Contador</title>
+    <style>
+        /* Estilização para fixar o contador no canto superior direito */
+        #contador-container {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #contador-container img {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="contador-container">
+        <span>Visitantes:</span>
+        <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fseusite.github.io&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false" alt="Contador de Visitas"/>
+    </div>
+
+    <h1>Bem-vindo ao meu site!</h1>
+    <p>O contador está ali no cantinho direito.</p>
+
+</body>
+</html>
