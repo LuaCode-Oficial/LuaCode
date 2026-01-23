@@ -171,3 +171,16 @@
 
 </body>
 </html>
+
+    <script>
+    // Escuta o evento antes do descarregamento da página
+    window.addEventListener('beforeunload', function (e) {
+        // Mensagem personalizada (Note: navegadores modernos costumam exibir uma mensagem padrão por segurança)
+        var mensagem = "Ao você atualizar página você pode perder o que você fez, tem certeza que quer atualizar?";
+
+        // Configura a confirmação
+        e.preventDefault(); 
+        e.returnValue = mensagem; // Necessário para Chrome/Firefox
+        return mensagem;          // Necessário para outros navegadores
+    });
+</script>
